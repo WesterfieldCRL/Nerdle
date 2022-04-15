@@ -12,7 +12,6 @@
 #include <sstream>
 #include <ctime>
 #include <cstring>
-#include <string>
 
 using namespace std;
 
@@ -37,7 +36,7 @@ void generateEquation(stringstream&);
  *
 */
 
-bool isValidEquation(const stringstream&);
+bool isValidEquation(stringstream&);
 
 /*
  * description: compares the master equation to the user equation and
@@ -47,7 +46,7 @@ bool isValidEquation(const stringstream&);
                 a 2 means that the character in the user array is an exact match for the
                 character in the master array
  * return: void
- * precondition: two stringstream's exist, and an array of size 8 exists
+ * precondition: two stringstream's exist, and an array of size 8 exists. Both stringstreams must also be valid equations
  * postcondition: only the array has been changed
  *
 */
