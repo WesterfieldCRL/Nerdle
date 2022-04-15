@@ -19,7 +19,7 @@ Assumptions:
 
 #include "SDL_Plotter.h"
 
-//Compile using: g++ main.cpp SDL_Plotter.cpp -I /usr/include/SDL2/ -lSDL2 -lGL -lSDL2_mixer
+//Compile using: g++ -oNameOfFile main.cpp SDL_Plotter.cpp -I /usr/include/SDL2/ -lSDL2 -lGL -lSDL2_mixer
 
 using namespace std;
 
