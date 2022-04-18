@@ -148,6 +148,7 @@ Point Line::intersect(const Line& otherLine) const
     return point;
 }
 
+
 void Line::display(ostream& out) const
 {
     if (!hasSlope())
