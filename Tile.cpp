@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/17/2022
+//Date Last Modified: 4/19/2022
 
 #include "Tile.h"
 
@@ -86,12 +86,6 @@ char Tile::getLetter() const
 
 void Tile::draw(SDL_Plotter& plotter) const
 {
-    //create character class
-    for (int y = p.y; y < height; y++)
-    {
-        for (int x = p.x; x < width; x++)
-        {
-            plotter.plotPixel(x,y,color.R,color.G,color.B);
-        }
-    }
+    //create draw functions for characters
+    drawRectangle(p, width, height, plotter, color);
 }

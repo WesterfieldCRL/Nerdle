@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/15/2022
-//Date Last Modified: 4/17/2022
+//Date Last Modified: 4/19/2022
 
 
 
@@ -17,7 +17,6 @@ Assumptions:
 
 #include <iostream>
 #include "Tile.h"
-#include "drawObject.h"
 #include "equationManip.h"
 #include "SDL_Plotter.h"
 
@@ -31,14 +30,7 @@ int main(int argc, char ** argv)
 
     SDL_Plotter plotter(500,500);
     Tile tile;
-    Point point1(190,50);
-    Point point2(200,50);
-    Point point3(50,200);
-    Point point4(60,200);
-    Line line1(point1, point3);
-    Line line2(point2, point4);
-    Line line3(point1, point2);
-    Line line4(point3, point4);
+    Point point1(50,50);
     Color gray(82,80,52);
     Color red(255,20,20);
     bool test = false;
@@ -51,11 +43,7 @@ int main(int argc, char ** argv)
     while (!plotter.getQuit()){
 
     	plotter.update();
-
-        drawLine(line1, plotter, red);
-        //drawLine(line2, plotter, red);
-        //drawLine(line3, plotter, red);
-        //drawLine(line4, plotter, red);
+        tile.draw(plotter);
 
     	if(plotter.kbhit()){
     	    plotter.getKey();

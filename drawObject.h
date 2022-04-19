@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/18/2022
+//Date Last Modified: 4/19/2022
 
 #ifndef DRAWOBJECT_H_INCLUDED
 #define DRAWOBJECT_H_INCLUDED
@@ -17,24 +17,16 @@ using namespace std;
 
 
 /*
-* description: draws a line given a line object.
+* description: draws a Rectangle given a point and two ints
 * return: void
-* precondition: a line object, a SDL_Plotter, and a color object exist
+* precondition: a point object, two integers, a SDL_Plotter, and a Color exist.
+                the point should also be the topLeft coordinate of the rectangle
+                and the integers must be greater than zero.
 * postcondition: all of the objects are unchanged.
 *
 */
 
-void drawLine(Line, SDL_Plotter&, Color);
-
-/*
-* description: fills the space in between two lines.
-* return: void
-* precondition: two line objects, a SDL_Plotter, and a color object exist
-* postcondition: none
-*
-*/
-
-void drawQuadrilateral(const Point topRight, const Point topLeft, const Point bottomRight, const Point bottomLeft, SDL_Plotter&, Color);
+void drawRectangle(Point topLeft, int width, int height, SDL_Plotter&, Color);
 
 /*
 * description:
@@ -45,18 +37,5 @@ void drawQuadrilateral(const Point topRight, const Point topLeft, const Point bo
 */
 
 void drawCircle(Point middle, int radius);
-
-/*
-* description:
-* return:
-* precondition:
-* postcondition:
-*
-*/
-
-void drawHalfCircle(Point middle, Point top, int radius);
-
-
-
 
 #endif // DRAWOBJECT_H_INCLUDED

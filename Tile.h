@@ -12,6 +12,7 @@
 #include "Point.h"
 #include "color.h"
 #include "SDL_Plotter.h"
+#include "drawObject.h"
 
 using namespace std;
 
