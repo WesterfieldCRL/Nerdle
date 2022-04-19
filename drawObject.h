@@ -27,10 +27,10 @@ using namespace std;
 void drawLine(Line, SDL_Plotter&, Color);
 
 /*
-* description:
-* return:
-* precondition:
-* postcondition:
+* description: fills the space in between two lines.
+* return: void
+* precondition: two line objects, a SDL_Plotter, and a color object exist
+* postcondition: none
 *
 */
 

@@ -3,7 +3,7 @@
 //Assignment Description: Line class
 //Due Date: 4/11/2022
 //Date Created: 4/6/2022
-//Date Last Modified: 4/17/2022
+//Date Last Modified: 4/6/2022
 
 #ifndef LINE_H_INCLUDED
 #define LINE_H_INCLUDED
@@ -72,16 +72,6 @@ class Line{
 		*/
 
 		Point getSecondPoint() const;
-
-		/*
-		* description: returns true if the point is on the line
-		* return: boolean
-		* precondition: a point object exists
-		* postcondition: a boolean has been returned
-		*
-		*/
-
-		bool isPointOnLine(const Point&) const;
 
 		/*
 		* description: returns true if the line has a slope

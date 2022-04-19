@@ -3,7 +3,7 @@
 //Assignment Description: Line class
 //Due Date: 4/11/2022
 //Date Created: 4/6/2022
-//Date Last Modified: 4/17/2022
+//Date Last Modified: 4/6/2022
 
 #include "Line.h"
 
@@ -31,17 +31,6 @@ Point Line::getFirstPoint() const
 Point Line::getSecondPoint() const
 {
     return p2;
-}
-
-bool Line::isPointOnLine(const Point& p) const
-{
-    bool isIt = false;
-    Line line(p, p1);
-    if (isCollinear(line))
-    {
-        isIt = true;
-    }
-    return isIt;
 }
 
 bool Line::hasSlope() const
@@ -147,7 +136,6 @@ Point Line::intersect(const Line& otherLine) const
     point.y = y;
     return point;
 }
-
 
 void Line::display(ostream& out) const
 {
