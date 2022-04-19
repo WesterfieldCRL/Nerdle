@@ -30,7 +30,7 @@ int main(int argc, char ** argv)
 
     SDL_Plotter plotter(500,500);
     Tile tile;
-    Point point1(50,50);
+    Point point1(100,100);
     Color gray(82,80,52);
     Color red(255,20,20);
     bool test = false;
@@ -43,7 +43,9 @@ int main(int argc, char ** argv)
     while (!plotter.getQuit()){
 
     	plotter.update();
+        drawCircle(point1, 100, plotter, red);
         tile.draw(plotter);
+
 
     	if(plotter.kbhit()){
     	    plotter.getKey();
