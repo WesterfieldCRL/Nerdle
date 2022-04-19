@@ -45,5 +45,3 @@ void drawCircle(Point middle, int r, SDL_Plotter& plotter, Color color)
         }
     }
 }
-
-void drawHalfCircle(Point middle, Point top, int radius);
