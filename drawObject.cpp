@@ -18,6 +18,23 @@ void drawRectangle(Point topLeft, int width, int height, SDL_Plotter& plotter, C
     }
 }
 
-void drawCircle(Point middle, int radius);
+void drawCircle(Point middle, int r, SDL_Plotter& plotter, Color color)
+{
+    int x, y;
+
+    for (int i = 0; i < r*2; i++)
+    {
+        for (int j = 0; j < r*2; j++)
+        {
+            x = i-r;
+            y = j-r;
+
+            if (x*x + y*y <= r*r)
+            {
+                plotter.plotPixel(x+middle.x, y+middle.y, color.R, color.G, color.B);   
+            }
+        }
+    }
+}
 
 void drawHalfCircle(Point middle, Point top, int radius);

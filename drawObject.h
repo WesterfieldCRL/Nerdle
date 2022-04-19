@@ -9,6 +9,7 @@
 #define DRAWOBJECT_H_INCLUDED
 
 #include <iostream>
+#include <cmath>
 #include "Point.h"
 #include "Line.h"
 #include "color.h"
@@ -36,6 +37,6 @@ void drawRectangle(Point topLeft, int width, int height, SDL_Plotter&, Color);
 *
 */
 
-void drawCircle(Point middle, int radius);
+void drawCircle(Point middle, int radius, SDL_Plotter&, Color);
 
 #endif // DRAWOBJECT_H_INCLUDED
