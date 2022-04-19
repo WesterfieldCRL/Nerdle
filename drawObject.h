@@ -9,7 +9,6 @@
 #define DRAWOBJECT_H_INCLUDED
 
 #include <iostream>
-#include <cmath>
 #include "Point.h"
 #include "Line.h"
 #include "color.h"
@@ -30,10 +29,10 @@ using namespace std;
 void drawRectangle(Point topLeft, int width, int height, SDL_Plotter&, Color);
 
 /*
-* description:
-* return:
-* precondition:
-* postcondition:
+* description: draws a circle given the middlePoint and the radius
+* return: void
+* precondition: radius must be greater than zero, and the Point must be in the middle of the circle
+* postcondition: all of the objects are unchanged
 *
 */
 
