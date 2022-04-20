@@ -10,7 +10,6 @@
 
 #include <iostream>
 #include "Point.h"
-#include "Line.h"
 #include "color.h"
 #include "SDL_Plotter.h"
 using namespace std;

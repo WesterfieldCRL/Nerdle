@@ -1,7 +1,6 @@
 #include <iostream>
 #include <sstream>
 #include <time.h>
-#include "Line.h"
 //#include "drawObject.h"
 
 using namespace std;

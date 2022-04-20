@@ -21,7 +21,7 @@ Assumptions:
 #include "SDL_Plotter.h"
 
 //Compile using: plotter++ -oNameOfFile main.cpp SDL_Plotter.cpp -I /usr/include/SDL2/ -lSDL2 -lGL -lSDL2_mixer
-//Point.cpp, Line.cpp, equationManip.cpp, drawObject.cpp, Tile.cpp
+//Point.cpp, equationManip.cpp, drawObject.cpp, Tile.cpp
 
 using namespace std;
 
