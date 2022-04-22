@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/19/2022
+//Date Last Modified: 4/21/2022
 
 #ifndef DRAWOBJECT_H_INCLUDED
 #define DRAWOBJECT_H_INCLUDED
@@ -25,7 +25,7 @@ using namespace std;
 *
 */
 
-void drawRectangle(Point topLeft, int width, int height, SDL_Plotter&, Color);
+void drawRectangle(const Point& topLeft, int width, int height, SDL_Plotter&, const Color&);
 
 /*
 * description: draws a circle given the middlePoint and the radius
@@ -35,6 +35,16 @@ void drawRectangle(Point topLeft, int width, int height, SDL_Plotter&, Color);
 *
 */
 
-void drawCircle(Point middle, int radius, SDL_Plotter&, Color);
+void drawCircle(const Point& middle, int radius, SDL_Plotter&, const Color&);
+
+//Note: the following functions are for proof of concept purpuses
+//The goal is to eventually merge these into a class or one function,
+//so that you provide the function with a character and it plots the character
+
+void drawOne(const Point& topLeft, int width, int height, SDL_Plotter&, const Color& background, const Color& foreground);
+
+void drawTwo(const Point& topLeft, int width, int height, SDL_Plotter&, Color background, const Color& foreground);
+
+void drawThree(const Point& topLeft, int width, int height, SDL_Plotter&, const Color& background, const Color& foreground);
 
 #endif // DRAWOBJECT_H_INCLUDED

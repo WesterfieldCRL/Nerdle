@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/17/2022
+//Date Last Modified: 4/21/2022
 
 #ifndef TILE_H_INCLUDED
 #define TILE_H_INCLUDED
@@ -37,6 +37,16 @@ class Tile
     */
 
     Tile();
+
+    /*
+    * description: constructs a tile object with the input values
+    * return: tile object
+    * precondition: a point object, two integers, and a color object exist
+    * postcondition: a tile object has been created
+    *
+    */
+
+    Tile(const Point&, int width, int height, const Color&);
 
     /*
     * description: sets the location of the tile

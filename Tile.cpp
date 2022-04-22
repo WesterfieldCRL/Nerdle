@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/19/2022
+//Date Last Modified: 4/21/2022
 
 #include "Tile.h"
 
@@ -11,6 +11,14 @@ Tile::Tile()
 {
     width = 1;
     height = 1;
+}
+
+Tile::Tile(const Point& point, int w, int h, const Color& c)
+{
+    p = point;
+    width = w;
+    height = h;
+    color = c;
 }
 
 void Tile::setLocation(const Point& otherP)

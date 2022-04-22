@@ -3,11 +3,11 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/19/2022
+//Date Last Modified: 4/21/2022
 
 #include "drawObject.h"
 
-void drawRectangle(Point topLeft, int width, int height, SDL_Plotter& plotter, Color color)
+void drawRectangle(const Point& topLeft, int width, int height, SDL_Plotter& plotter, const Color& color)
 {
     //starts at the x and y coordinates and loops till the width and height.
     for (int y = topLeft.y; y < height+topLeft.y; y++)
@@ -43,5 +43,31 @@ void drawCircle(Point middle, int r, SDL_Plotter& plotter, Color color)
                 plotter.plotPixel(x+middle.x, y+middle.y, color.R, color.G, color.B);   
             }
         }
+    }
+}
+
+void drawOne(const Point& topLeft, int width, int height, SDL_Plotter& plotter, const Color& background, const Color& foreground)
+{
+    int stemSpacing = width/3;
+    int bottomRectSpacing = height/7;
+    int noseHeight = height/7;
+    int noseSlope = 2;
+    int xNum = stemSpacing;
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            if ((x > stemSpacing && x < width-stemSpacing) || (y > height-bottomRectSpacing))
+            {
+                plotter.plotPixel(x + topLeft.x, y + topLeft.y, foreground.R, foreground.G, foreground.B);
+            }
+        }
+    }
+    //assembling the nose of the 1
+    for (int y = 0; xNum >= 0; y++)
+    {
+        Point temp(xNum + topLeft.x, y + topLeft.y);
+        drawRectangle(temp, noseSlope, noseHeight, plotter, foreground);
+        xNum-=noseSlope;
     }
 }
