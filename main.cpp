@@ -47,7 +47,9 @@ int main(int argc, char ** argv)
     while (!plotter.getQuit())
     {
         plotter.update();
-        now = chrono::steady_clock::now();
+
+
+        /*now = chrono::steady_clock::now();
         drawOne(point, drawWidth, drawHeight, plotter, red, white);
         if (chrono::duration_cast<chrono::milliseconds>(now-start).count() >= 16.7)
         {
@@ -63,7 +65,11 @@ int main(int argc, char ** argv)
             }
             start = chrono::steady_clock::now();
         }
-        drawOne(point, drawWidth, drawHeight, plotter, red, gray);
+        drawOne(point, drawWidth, drawHeight, plotter, red, gray);*/
+
+        drawCircle(point, 50, plotter, red);
+        drawTwo(point, 50, 50, plotter, white, gray);
+
         if(plotter.kbhit())
         {
             plotter.getKey();

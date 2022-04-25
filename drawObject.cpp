@@ -19,7 +19,7 @@ void drawRectangle(const Point& topLeft, int width, int height, SDL_Plotter& plo
     }
 }
 
-void drawCircle(Point middle, int r, SDL_Plotter& plotter, Color color)
+void drawCircle(const Point& middle, int r, SDL_Plotter& plotter, const Color& color)
 {
     int x, y;
     //loops through a square of size r*2
@@ -70,4 +70,10 @@ void drawOne(const Point& topLeft, int width, int height, SDL_Plotter& plotter, 
         drawRectangle(temp, noseSlope, noseHeight, plotter, foreground);
         xNum-=noseSlope;
     }
+}
+
+void drawTwo(const Point& topLeft, int width, int height, SDL_Plotter& plotter, Color background, const Color& foreground)
+{
+    Point middle(topLeft.x+(static_cast<double>(width)/2), topLeft.y + (height/0.333));
+    drawCircle(middle, width/2, plotter, foreground);
 }
