@@ -9,7 +9,11 @@
 #define ARRAYDRAW_H_INCLUDED
 
 #include "Point.h"
+#include "SDL_Plotter.h"
+#include "color.h"
 #include <iostream>
+#include <fstream>
+#include <cassert>
 using namespace std;
 
 /*
@@ -20,17 +24,9 @@ using namespace std;
  *
 */
 
-void drawRectangleArray(int x, int y, int width, int height, int array[][10], int num);
+void drawChar(char, const Point&, SDL_Plotter&, const Color&, int size = 1);
 
-/*
- * description:
- * return:
- * precondition:
- * postcondition:
- *
-*/
-
-void drawCircleArray(Point middle, int radius, int array[], int num);
+void drawArray(const Point&, SDL_Plotter&, const Color&, ifstream&, int size);
 
 
 #endif // ARRAYDRAW_H_INCLUDED

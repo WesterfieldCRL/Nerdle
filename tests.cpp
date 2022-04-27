@@ -1,18 +1,12 @@
 #include <iostream>
-#include <ctime>
+#include "arrayDraw.h"
 
 using namespace std;
 
 int main()
 {
-
-    /*double originalTime = time(0);
-    double elapsedTime;
-    while (elapsedTime < 5)
-    {
-        elapsedTime = time(0) - originalTime;
-    }*/
-    
+    Point p(0,0);
+    drawChar('2', p);
 
     return 0;
 }
