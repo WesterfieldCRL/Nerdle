@@ -47,4 +47,8 @@ void drawTwo(const Point& topLeft, int width, int height, SDL_Plotter&, Color ba
 
 void drawThree(const Point& topLeft, int width, int height, SDL_Plotter&, const Color& background, const Color& foreground);
 
+//for testing purposes
+
+void drawOutline(const Point& topLeft, int width, int height, SDL_Plotter&, const Color& background, const Color& foreground);
+
 #endif // DRAWOBJECT_H_INCLUDED

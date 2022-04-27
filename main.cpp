@@ -31,16 +31,16 @@ int main(int argc, char ** argv)
 {
 
     auto start = chrono::steady_clock::now();
-    SDL_Plotter plotter(500,500);
+    SDL_Plotter plotter(1000,1000);
     Color gray(82,80,52);
     Color red(255,20,20);
     Color white(255,255,255);
-    int drawWidth = 40;
-    int drawHeight = 50;
+    int width = 350;
+    int height = 500;
     bool test = false;
     int xSpeed = 1;
     int ySpeed = 2;
-    Point point(50,50);
+    Point point(200,200);
     Tile tile(point, 50, 50, gray);
     auto now = chrono::steady_clock::now();
 
@@ -48,7 +48,7 @@ int main(int argc, char ** argv)
     {
         plotter.update();
 
-
+        //use clock()?
         /*now = chrono::steady_clock::now();
         drawOne(point, drawWidth, drawHeight, plotter, red, white);
         if (chrono::duration_cast<chrono::milliseconds>(now-start).count() >= 16.7)
@@ -67,8 +67,13 @@ int main(int argc, char ** argv)
         }
         drawOne(point, drawWidth, drawHeight, plotter, red, gray);*/
 
-        drawCircle(point, 50, plotter, red);
-        drawTwo(point, 50, 50, plotter, white, gray);
+        if (!test)
+        {
+            drawTwo(point, width, height, plotter, white, gray);
+            test = true;
+        }
+
+        drawOutline(point, width, height, plotter, white, red);
 
         if(plotter.kbhit())
         {
