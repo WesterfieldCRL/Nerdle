@@ -7,11 +7,14 @@
 
 #include "arrayDraw.h"
 
-void drawChar(char character, const Point& p, SDL_Plotter&, const Color& color, int size)
+void drawChar(char character, const Point& p, SDL_Plotter& plotter, const Color& color, int size)
 {
     ifstream file;
     switch (character)
     {
+        case '0':
+            file.open("zero.dat");
+            break;
         case '1':
             file.open("one.dat");
             break;
@@ -56,7 +59,7 @@ void drawChar(char character, const Point& p, SDL_Plotter&, const Color& color, 
             break;
     }
     assert(file);
-    drawArray(p, file, plotter, color, size);
+    drawArray(p, plotter, color, file, size);
 }
 
 void drawArray(const Point& point, SDL_Plotter& plotter, const Color& color, ifstream& file, int size)
@@ -64,17 +67,23 @@ void drawArray(const Point& point, SDL_Plotter& plotter, const Color& color, ifs
     int row;
     int col;
     int num;
+    int factor = 0;
     file >> row >> col;
     for (int y = 0; y < row; y++)
     {
         for (int x = 0; x < col; x++)
         {
-            for (int yFactor = -size; yFactor <= size; yFactor++)
+            file >> num;
+            if (num == 1)
             {
-                for (int xFactor = -size; xFactor <= size; xFactor++)
+                for (int i = -size; i <= size; i++)
                 {
-                    plotter.plotPixel(x + point.x + xFactor, y + point.y + yFactor, color.R, color.G, color.B);
+                    for (int j = -size; j <= size; j++)
+                    {
+                        plotter.plotPixel(x + point.x+i+factor, y + point.y+j+factor, color.R, color.G, color.B);
+                    }
                 }
+                //factor+=size;
             }
         }
     }

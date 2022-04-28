@@ -20,17 +20,17 @@ Assumptions:
 #include "Point.h"
 #include "equationManip.h"
 #include "SDL_Plotter.h"
-#include <chrono>
+#include "arrayDraw.h"
 
 //Compile using: plotter++ -oNameOfFile main.cpp SDL_Plotter.cpp -I /usr/include/SDL2/ -lSDL2 -lGL -lSDL2_mixer
-//Point.cpp, equationManip.cpp, drawObject.cpp, Tile.cpp
+//Point.cpp, equationManip.cpp, drawObject.cpp, Tile.cpp, arrayDraw.cpp
 
 using namespace std;
 
 int main(int argc, char ** argv)
 {
 
-    auto start = chrono::steady_clock::now();
+    //auto start = chrono::steady_clock::now();
     SDL_Plotter plotter(1000,1000);
     Color gray(82,80,52);
     Color red(255,20,20);
@@ -42,7 +42,7 @@ int main(int argc, char ** argv)
     int ySpeed = 2;
     Point point(200,200);
     Tile tile(point, 50, 50, gray);
-    auto now = chrono::steady_clock::now();
+    ///auto now = chrono::steady_clock::now();
 
     while (!plotter.getQuit())
     {
@@ -67,13 +67,15 @@ int main(int argc, char ** argv)
         }
         drawOne(point, drawWidth, drawHeight, plotter, red, gray);*/
 
-        if (!test)
+        drawChar('1', point, plotter, red, 5);
+        /*
+        for (int i = -10; i <= 10; i++)
         {
-            drawTwo(point, width, height, plotter, white, gray);
-            test = true;
-        }
-
-        drawOutline(point, width, height, plotter, white, red);
+            for (int j = -10; j <= 10; j++)
+            {
+                plotter.plotPixel(50+i,50+j,red.R,red.G,red.B);
+            }
+        }*/
 
         if(plotter.kbhit())
         {
