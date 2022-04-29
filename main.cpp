@@ -34,11 +34,6 @@ int main(int argc, char ** argv)
     Color gray(82,80,52);
     Color red(255,20,20);
     Color white(255,255,255);
-    int width = 350;
-    int height = 500;
-    bool test = false;
-    int xSpeed = 1;
-    int ySpeed = 2;
     Point point(200,200);
     Tile tile(point, 50, 50, gray, '2');
 
@@ -48,7 +43,7 @@ int main(int argc, char ** argv)
 
         //use clock()?
 
-        tile.draw(plotter);
+        tile.draw(plotter, red);
 
         if(plotter.kbhit())
         {
