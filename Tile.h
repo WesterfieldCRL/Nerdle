@@ -151,7 +151,7 @@ class Tile
     /*
     * description: draws the tile
     * return: void
-    * precondition: a SDL_Plotter object exists
+    * precondition: a SDL_Plotter object, and a Color object exist
     * postcondition: the tile is unchanged
     *
     */
