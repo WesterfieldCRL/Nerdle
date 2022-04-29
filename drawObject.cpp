@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/21/2022
+//Date Last Modified: 4/28/2022
 
 #include "drawObject.h"
 
@@ -46,68 +46,85 @@ void drawCircle(const Point& middle, int r, SDL_Plotter& plotter, const Color& c
     }
 }
 
-void drawOne(const Point& topLeft, int width, int height, SDL_Plotter& plotter, const Color& background, const Color& foreground)
+void drawChar(char character, const Point& p, SDL_Plotter& plotter, const Color& color, int size)
 {
-    int stemSpacing = width/3;
-    int bottomRectSpacing = height/7;
-    int noseHeight = height/7;
-    int noseSlope = 2;
-    int xNum = stemSpacing;
-    for (int y = 0; y < height; y++)
+    ifstream file;
+    switch (character)
     {
-        for (int x = 0; x < width; x++)
+        case '0':
+            file.open("zero.dat");
+            break;
+        case '1':
+            file.open("one.dat");
+            break;
+        case '2':
+            file.open("two.dat");
+            break;
+        case '3':
+            file.open("three.dat");
+            break;
+        case '4':
+            file.open("four.dat");
+            break;
+        case '5':
+            file.open("five.dat");
+            break;
+        case '6':
+            file.open("six.dat");
+            break;
+        case '7':
+            file.open("seven.dat");
+            break;
+        case '8':
+            file.open("eight.dat");
+            break;
+        case '9':
+            file.open("nine.dat");
+            break;
+        case '+':
+            file.open("plus.dat");
+            break;
+        case '-':
+            file.open("minus.dat");
+            break;
+        case '/':
+            file.open("divide.dat");
+            break;
+        case '*':
+            file.open("multiply.dat");
+            break;
+        default:
+            cout << "character not found" << endl;
+            break;
+    }
+    assert(file);
+    drawArray(p, plotter, color, file, size);
+}
+
+void drawArray(const Point& point, SDL_Plotter& plotter, const Color& color, ifstream& file, int size)
+{
+    int row;
+    int col;
+    int num;
+    file >> row >> col;
+    //spaces the pixels size distance apart, then creates a pixel of 2*size width.
+    for (int y = 0; y < row * size; y+=size)
+    {
+        for (int x = 0; x < col * size; x+=size)
         {
-            if ((x > stemSpacing && x < width-stemSpacing) || (y > height-bottomRectSpacing))
+            file >> num;
+            if (num == 1)
             {
-                plotter.plotPixel(x + topLeft.x, y + topLeft.y, foreground.R, foreground.G, foreground.B);
+                for (int i = -size; i < size; i++)
+                {
+                    for (int j = -size; j < size; j++)
+                    {
+                        plotter.plotPixel(x + point.x + j, y + point.y + i, color.R, color.G, color.B);
+                    }
+                }
             }
         }
     }
-    //assembling the nose of the 1
-    //needs to be rewritten because it cant be resized unlike the rest of the function
-    for (int y = 0; xNum >= 0; y++)
-    {
-        Point temp(xNum + topLeft.x, y + topLeft.y);
-        drawRectangle(temp, noseSlope, noseHeight, plotter, foreground);
-        xNum-=noseSlope;
-    }
-}
 
-void drawTwo(const Point& topLeft, int width, int height, SDL_Plotter& plotter, Color background, const Color& foreground)
-{
-    Point middle(topLeft.x+width/2, topLeft.y+width/2);
-    double xFactor;
-    drawCircle(middle, width/2, plotter, foreground);
-    drawCircle(middle, width/4,plotter, background);
-    middle.x = topLeft.x;
-    drawRectangle(middle, width, width/2, plotter, background);
-
-    //drawing middle of 2
-    middle.x = topLeft.x + (width-width/4);
-    xFactor = static_cast<double>(width-(width/2-width/4))/((height-height/5)-(width/2));
-    for (int i = width/2; i < (height-height/5); i++)
-    {
-        middle.y = i + topLeft.y;
-        drawRectangle(middle, width/2-width/4, 1, plotter, foreground);
-        
-    }
-
-    middle.x = topLeft.x;
-    middle.y = topLeft.y + (height-height/5);
-    drawRectangle(middle, width, height/5, plotter, foreground);
-}
-
-//this is mainly here for testing purposes
-void drawOutline (const Point& topLeft, int width, int height, SDL_Plotter& plotter, const Color& background, const Color& foreground)
-{
-    for (int y = 0; y < height; y++)
-    {
-        for (int x = 0; x < width; x++)
-        {
-            if (x ==0 || y == 0 || x == width-1 || y == height-1)
-            {
-                plotter.plotPixel(x+topLeft.x, y + topLeft.y, foreground.R, foreground.G, foreground.B);
-            }
-        }
-    }
+    file.close();
 }

@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/21/2022
+//Date Last Modified: 4/28/2022
 
 #ifndef DRAWOBJECT_H_INCLUDED
 #define DRAWOBJECT_H_INCLUDED
@@ -12,6 +12,8 @@
 #include "Point.h"
 #include "color.h"
 #include "SDL_Plotter.h"
+#include <fstream>
+#include <cassert>
 using namespace std;
 
 
@@ -37,18 +39,25 @@ void drawRectangle(const Point& topLeft, int width, int height, SDL_Plotter&, co
 
 void drawCircle(const Point& middle, int radius, SDL_Plotter&, const Color&);
 
-//Note: the following functions are for proof of concept purpuses
-//The goal is to eventually merge these into a class or one function,
-//so that you provide the function with a character and it plots the character
+/*
+ * description: opens the aproppriate file for the character, and calls drawArray
+ * return: void
+ * precondition: some char, Point, SDL_Plotter and Color exist
+ * postcondition: none
+ *
+*/
 
-void drawOne(const Point& topLeft, int width, int height, SDL_Plotter&, const Color& background, const Color& foreground);
+void drawChar(char, const Point&, SDL_Plotter&, const Color&, int size = 1);
 
-void drawTwo(const Point& topLeft, int width, int height, SDL_Plotter&, Color background, const Color& foreground);
+/*
+ * description: gets instructions from a file on drawing a char.
+ * return: void
+ * precondition: some Point, SDL_Plotter, Color, ifstream, and integer exist
+ *               the file must have been opened and must be formatted properly
+ * postcondition: none
+ *
+*/
 
-void drawThree(const Point& topLeft, int width, int height, SDL_Plotter&, const Color& background, const Color& foreground);
-
-//for testing purposes
-
-void drawOutline(const Point& topLeft, int width, int height, SDL_Plotter&, const Color& background, const Color& foreground);
+void drawArray(const Point&, SDL_Plotter&, const Color&, ifstream&, int size);
 
 #endif // DRAWOBJECT_H_INCLUDED

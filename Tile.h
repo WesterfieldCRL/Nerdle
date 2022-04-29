@@ -46,7 +46,7 @@ class Tile
     *
     */
 
-    Tile(const Point&, int width, int height, const Color&);
+    Tile(const Point&, int width, int height, const Color&, char);
 
     /*
     * description: sets the location of the tile

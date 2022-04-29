@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/15/2022
-//Date Last Modified: 4/19/2022
+//Date Last Modified: 4/28/2022
 
 
 
@@ -20,10 +20,10 @@ Assumptions:
 #include "Point.h"
 #include "equationManip.h"
 #include "SDL_Plotter.h"
-#include "arrayDraw.h"
+#include "drawObject.h"
 
 //Compile using: plotter++ -oNameOfFile main.cpp SDL_Plotter.cpp -I /usr/include/SDL2/ -lSDL2 -lGL -lSDL2_mixer
-//Point.cpp, equationManip.cpp, drawObject.cpp, Tile.cpp, arrayDraw.cpp
+//Point.cpp, equationManip.cpp, drawObject.cpp, Tile.cpp
 
 using namespace std;
 
@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
     int xSpeed = 1;
     int ySpeed = 2;
     Point point(200,200);
-    Tile tile(point, 50, 50, gray);
+    Tile tile(point, 50, 50, gray, '2');
 
     while (!plotter.getQuit())
     {
@@ -48,7 +48,7 @@ int main(int argc, char ** argv)
 
         //use clock()?
 
-        drawChar('1', point, plotter, red, 5);
+        tile.draw(plotter);
 
         if(plotter.kbhit())
         {

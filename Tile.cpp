@@ -11,14 +11,16 @@ Tile::Tile()
 {
     width = 1;
     height = 1;
+    letter = '1';
 }
 
-Tile::Tile(const Point& point, int w, int h, const Color& c)
+Tile::Tile(const Point& point, int w, int h, const Color& c, char character)
 {
     p = point;
     width = w;
     height = h;
     color = c;
+    letter = character;
 }
 
 void Tile::setLocation(const Point& otherP)
@@ -94,6 +96,8 @@ char Tile::getLetter() const
 
 void Tile::draw(SDL_Plotter& plotter) const
 {
-    //create draw functions for characters
+    //Not formatted properly, need second color for drawChar
+    Point temp(p.x,p.y);
     drawRectangle(p, width, height, plotter, color);
+    drawChar(letter, temp, plotter, color);
 }
