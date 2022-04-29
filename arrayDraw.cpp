@@ -69,21 +69,20 @@ void drawArray(const Point& point, SDL_Plotter& plotter, const Color& color, ifs
     int num;
     int factor = 0;
     file >> row >> col;
-    for (int y = 0; y < row; y++)
+    for (int y = 0; y < row * size; y+=size)
     {
-        for (int x = 0; x < col; x++)
+        for (int x = 0; x < col * size; x+=size)
         {
             file >> num;
             if (num == 1)
             {
-                for (int i = -size; i <= size; i++)
+                for (int i = -size; i < size; i++)
                 {
-                    for (int j = -size; j <= size; j++)
+                    for (int j = -size; j < size; j++)
                     {
-                        plotter.plotPixel(x + point.x+i+factor, y + point.y+j+factor, color.R, color.G, color.B);
+                        plotter.plotPixel(x + point.x + j, y + point.y + i, color.R, color.G, color.B);
                     }
                 }
-                //factor+=size;
             }
         }
     }

@@ -24,7 +24,7 @@ using namespace std;
  *
 */
 
-void drawChar(char, const Point&, SDL_Plotter&, const Color&, int size = 0);
+void drawChar(char, const Point&, SDL_Plotter&, const Color&, int size = 1);
 
 void drawArray(const Point&, SDL_Plotter&, const Color&, ifstream&, int size);
 

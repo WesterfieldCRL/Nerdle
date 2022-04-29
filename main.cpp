@@ -30,7 +30,6 @@ using namespace std;
 int main(int argc, char ** argv)
 {
 
-    //auto start = chrono::steady_clock::now();
     SDL_Plotter plotter(1000,1000);
     Color gray(82,80,52);
     Color red(255,20,20);
@@ -42,40 +41,14 @@ int main(int argc, char ** argv)
     int ySpeed = 2;
     Point point(200,200);
     Tile tile(point, 50, 50, gray);
-    ///auto now = chrono::steady_clock::now();
 
     while (!plotter.getQuit())
     {
         plotter.update();
 
         //use clock()?
-        /*now = chrono::steady_clock::now();
-        drawOne(point, drawWidth, drawHeight, plotter, red, white);
-        if (chrono::duration_cast<chrono::milliseconds>(now-start).count() >= 16.7)
-        {
-            point.x+=xSpeed;
-            point.y+=ySpeed;
-            if (point.x < 0 || point.x + drawWidth > plotter.getCol())
-            {
-                xSpeed *= -1;
-            }
-            if (point.y < 0 || point.y + drawHeight> plotter.getRow())
-            {
-                ySpeed *= -1;
-            }
-            start = chrono::steady_clock::now();
-        }
-        drawOne(point, drawWidth, drawHeight, plotter, red, gray);*/
 
         drawChar('1', point, plotter, red, 5);
-        /*
-        for (int i = -10; i <= 10; i++)
-        {
-            for (int j = -10; j <= 10; j++)
-            {
-                plotter.plotPixel(50+i,50+j,red.R,red.G,red.B);
-            }
-        }*/
 
         if(plotter.kbhit())
         {
