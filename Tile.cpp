@@ -94,10 +94,10 @@ char Tile::getLetter() const
 
 
 
-void Tile::draw(SDL_Plotter& plotter) const
+void Tile::draw(SDL_Plotter& plotter, Color alt) const
 {
-    //Not formatted properly, need second color for drawChar
-    Point temp(p.x,p.y);
+    //made using width and height = 50, cannot vouch for other sizes.
     drawRectangle(p, width, height, plotter, color);
-    drawChar(letter, temp, plotter, color);
+    Point temp(p.x+width/8,p.y+width/8);
+    drawChar(letter, temp, plotter, alt,width/16);
 }

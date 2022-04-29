@@ -156,7 +156,7 @@ class Tile
     *
     */
 
-    void draw(SDL_Plotter&) const;
+    void draw(SDL_Plotter&, Color numberColor) const;
 
 };
 
