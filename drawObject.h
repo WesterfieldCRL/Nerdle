@@ -60,4 +60,6 @@ void drawChar(char, const Point&, SDL_Plotter&, const Color&, int size = 1);
 
 void drawArray(const Point&, SDL_Plotter&, const Color&, ifstream&, int size);
 
+void drawOutline(const Point& topLeft, int width, int height, SDL_Plotter& plotter, const Color& color);
+
 #endif // DRAWOBJECT_H_INCLUDED

@@ -154,7 +154,15 @@ char SDL_Plotter::getKey(){
 	if(currentKeyStates[SDL_SCANCODE_RETURN]) key = SDL_SCANCODE_RETURN;
 	if(currentKeyStates[SDL_SCANCODE_ESCAPE]) quit = true;
 
-    	return key;
+	//Wesley Anastasi added these:
+	if(currentKeyStates[SDL_SCANCODE_KP_MINUS]) key = '-';
+	if(currentKeyStates[SDL_SCANCODE_KP_PLUS]) key = '+';
+	if(currentKeyStates[SDL_SCANCODE_KP_MULTIPLY]) key = '*';
+	if(currentKeyStates[SDL_SCANCODE_KP_DIVIDE]) key = '/';
+	if(currentKeyStates[SDL_SCANCODE_EQUALS]) key = '=';
+	if(currentKeyStates[SDL_SCANCODE_BACKSPACE]) key = 5;
+
+    return key;
 }
 
 void SDL_Plotter::plotPixel(int x, int y, int r, int g, int b){

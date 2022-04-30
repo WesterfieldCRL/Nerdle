@@ -3,7 +3,7 @@
 //Assignment Description: 
 //Due Date: 
 //Date Created: 4/17/2022
-//Date Last Modified: 4/21/2022
+//Date Last Modified: 4/29/2022
 
 #include "Tile.h"
 
@@ -98,6 +98,9 @@ void Tile::draw(SDL_Plotter& plotter, Color alt) const
 {
     //made using width and height = 50, cannot vouch for other sizes.
     drawRectangle(p, width, height, plotter, color);
-    Point temp(p.x+width/8,p.y+width/8);
-    drawChar(letter, temp, plotter, alt,width/16);
+    if (letter != 'n')
+    {
+        Point temp(p.x+width/8,p.y+width/8);
+        drawChar(letter, temp, plotter, alt,width/16);
+    }
 }

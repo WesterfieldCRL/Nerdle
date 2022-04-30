@@ -93,8 +93,11 @@ void drawChar(char character, const Point& p, SDL_Plotter& plotter, const Color&
         case '*':
             file.open("multiply.dat");
             break;
+        case '=':
+            file.open("equals.dat");
+            break;
         default:
-            cout << "character not found" << endl;
+            file.open("characterNotFound");
             break;
     }
     assert(file);
@@ -127,4 +130,18 @@ void drawArray(const Point& point, SDL_Plotter& plotter, const Color& color, ifs
     }
 
     file.close();
+}
+
+void drawOutline (const Point& topLeft, int width, int height, SDL_Plotter& plotter, const Color& color)
+{
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            if (x ==0 || y == 0 || x == width-1 || y == height-1)
+            {
+                plotter.plotPixel(x+topLeft.x, y + topLeft.y, color.R, color.G, color.B);
+            }
+        }
+    }
 }
