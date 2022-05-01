@@ -48,7 +48,7 @@ int main()
 
     }while((!correct) && (count<6));
     if((!correct)&&(count==6)){
-        cout<<"out of turns"<<endl;
+        cout<<"Out of turns"<<endl;
     }
     else{
         cout<<"You got it in "<<count
