@@ -1,9 +1,9 @@
 //Author: Wesley Anastasi
 //Assignment Title: 
 //Assignment Description: 
-//Due Date: 
+//Due Date: 5/6/2022
 //Date Created: 4/17/2022
-//Date Last Modified: 4/29/2022
+//Date Last Modified: 5/4/2022
 
 #include "Tile.h"
 
@@ -103,4 +103,20 @@ void Tile::draw(SDL_Plotter& plotter, Color alt) const
         Point temp(p.x+width/8,p.y+width/8);
         drawChar(letter, temp, plotter, alt,width/16);
     }
+}
+
+bool Tile::inside(int x, int y)
+{
+    bool returnValue = false;
+    for (int i = p.y; i < height+p.y; i++)
+    {
+        for (int a = p.x; a < width+p.x; a++)
+        {
+            if (x == a && y == i)
+            {
+                returnValue = true;
+            }
+        }
+    }
+    return returnValue;
 }

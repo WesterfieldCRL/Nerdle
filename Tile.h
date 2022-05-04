@@ -158,6 +158,16 @@ class Tile
 
     void draw(SDL_Plotter&, Color numberColor) const;
 
+    /*
+    * description: returns true if the point is inside the tile
+    * return: boolean
+    * precondition: two integers exist
+    * postcondition: a boolean has been returned
+    *
+    */
+
+    bool inside(int x, int y);
+
 };
 
 
