@@ -1,7 +1,7 @@
 //Author: Wesley Anastasi
-//Assignment Title: 
-//Assignment Description: 
-//Due Date: 
+//Assignment Title:
+//Assignment Description:
+//Due Date:
 //Date Created: 4/15/2022
 //Date Last Modified: 4/28/2022
 
@@ -9,15 +9,16 @@
 
 /*
 Data Abstraction:
-Input: 
+Input:
 Process:
-Output: 
+Output:
 Assumptions:
 */
 
 #include <iostream>
 #include <sstream>
 #include <cstring>
+#include <time.h>
 #include "SDL_Plotter.h"
 
 //Tile.h includes Point.h, color.h, and drawObject.h
@@ -32,7 +33,7 @@ using namespace std;
 int main(int argc, char ** argv)
 {
 
-    //Data Abastraction:
+    //Data Abstraction:
 
     stringstream user;
     stringstream master;
@@ -41,6 +42,7 @@ int main(int argc, char ** argv)
     char BACKSPACE = 5;
     bool resetInput = true;
     SDL_Plotter plotter(800,800);
+    int turn=0;
     int tilesX = 8;
     int tilesY = 6;
     int tileWidth = 50;
@@ -50,8 +52,10 @@ int main(int argc, char ** argv)
     int currTileX = 0;
     int currTileY = 0;
     bool endOfIndex = false;
+    bool win = false;
 
     int compare[8];
+    int compareSum = 0;
 
     Color black(0,0,0);
     Color lightBrown(171,125,79);
@@ -104,7 +108,7 @@ int main(int argc, char ** argv)
 
 
         //getting user input
-        if(plotter.kbhit())
+        if((plotter.kbhit()) && (turn < 6))
         {
             key = plotter.getKey();
             if (key=='0'||key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='+'||key=='-'||key=='*'||key=='/'||key=='=')
@@ -126,6 +130,7 @@ int main(int argc, char ** argv)
                     resetInput = true;
                     currTileX = 0;
                     currTileY++;
+
                     compareEquations(master, user, compare);
                     for (int i = 0; i < 8; i++)
                     {
@@ -142,6 +147,12 @@ int main(int argc, char ** argv)
                             tiles[i][currTileY-1].setColor(green);
                         }
                     }
+                    turn++;
+                }
+                else if(!isValidEquation(user))
+                {
+                    resetInput = true;
+                    currTileX = 0;
                 }
                 user.str("");
                 user.clear();
@@ -151,7 +162,7 @@ int main(int argc, char ** argv)
                 if (currTileX == 7&&endOfIndex)
                 {
                     userInput[currTileX] = 'n';
-                    endOfIndex = false;;
+                    endOfIndex = false;
                 }
                 else
                 {
@@ -172,8 +183,24 @@ int main(int argc, char ** argv)
             tiles[i][currTileY].setLetter(userInput[i]);
         }
 
+        //Takes values from the compare array, if equal to 16 (total possible with all 2s)
+        //returns a win condition
+        for (int i = 0; i < 8; i++)
+        {
+            compareSum = compareSum+compare[i];
+        }
+
+        if(compareSum == 16){
+            win = true;
+        }
+        else{
+            compareSum=0;
+        }
+
+
 
         //Update Tiles
+        if(turn < 6){
         for (int y = 0; y < tilesY; y++)
         {
             for (int x = 0; x < tilesX; x++)
@@ -181,9 +208,16 @@ int main(int argc, char ** argv)
                 tiles[x][y].draw(plotter, black);
             }
         }
+        }
+            for (int x = 0; x < tilesX; x++)
+            {
+                tiles[x][5].draw(plotter, black);
+            }
 
         drawOutline(point,tileWidth,tileHeight,plotter,red);
         point = tiles[currTileX][currTileY].getLocation();
         drawOutline(point,tileWidth,tileHeight,plotter,red);
+
     }
+
 }
