@@ -1,9 +1,10 @@
-//Author: Wesley Anastasi
+
+//Author: Wesley Anastasi, Madison Thomas, Seth Kacura, Chris Garcia, Christian Saldana, Daigon Fontenot
 //Assignment Title: Nerdle
 //Assignment Description: create Nerdle w/ SDL plotter
 //Due Date: 5/5/2022
-//Date Created: 4/14/2022
-//Date Last Modified: 4/14/2022
+//Date Created: 4/15/2022
+//Date Last Modified: 5/5/2022
 
 #ifndef EQUATIONMANIP_H_INCLUDED
 #define EQUATIONMANIP_H_INCLUDED
