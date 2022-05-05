@@ -1,7 +1,15 @@
 /*
  * SDL_Plotter.h
+ *
+ * Version 2.4
+ * 4/4/2022
+ *
+ * Version 2.3
+ *  6/28/2021
+ *
  * Version 2.2
  *  4/26/2019
+ *
  *  Dr. Booth
  */
 
@@ -9,19 +17,13 @@
 #define SDL_PLOTTER_H_
 
 //OSX Library
-//#include <SDL2/SDL.h>
-//#include <SDL2/SDL_mixer.h>
-//#include <SDL2/SDL_thread.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_thread.h>
 
 //Windows Library
 //#include <SDL2/SDL.h>
 //#include <SDL2/SDL_mixer.h>
-
-//Linux Library
-#include <SDL.h>
-#include <SDL_opengl.h>
-#include <stdio.h>
-#include "SDL_mixer.h"
 
 #include <string.h>
 #include <iostream>
@@ -42,7 +44,6 @@ const int WHITE = 255;
 const int MAX_THREAD = 100;
 
 //Threaded Sound Function
-static int Sound(void *data);
 
 struct param{
 	bool play;
@@ -57,6 +58,10 @@ struct param{
 		play = false;
 		running = false;
 		pause = false;
+	    cond = nullptr;
+	    mut  = nullptr;
+	    threadID = nullptr;
+	    name="";
 	}
 };
 

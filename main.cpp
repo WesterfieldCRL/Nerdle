@@ -39,7 +39,6 @@ int main(int argc, char ** argv)
     stringstream master;
     char userInput[8];
     char key;
-    char BACKSPACE = 5;
     bool resetInput = true;
     SDL_Plotter plotter(800,800);
     int tilesX = 8;
@@ -55,10 +54,8 @@ int main(int argc, char ** argv)
     int keyYlocation = 600;
     int keyXnum = 9;
     int keyYnum = 2;
-    //char keyIn [19] = {'0','1','2','3','4','5','6','7','8','9','+','-','*','/','=',5,SDL_SCANCODE_RETURN,'n'};
-    int keyPop=0;
     int cursX, cursY;
-    //Point cursor(cursX, cursY);
+    bool buttonPress = false;
 
 
     bool endOfIndex = false;
@@ -68,6 +65,7 @@ int main(int argc, char ** argv)
     int compareSum = 0;
 
     Color black(0,0,0);
+    Color gray(100,100,100);
     Color lightBrown(171,125,79);
     Color white(255,255,255);
     Color red(255,40,40);
@@ -99,28 +97,27 @@ int main(int argc, char ** argv)
         point.y += tileHeight+10;
         point.x = tileXLocation;
     }
-
-    for (int y= 0; y < keyYnum; y++)
+    /*
+    for (int y = 0; y < 2; y++)
     {
-        for (int x= 0; x < keyXnum; x++)
+        for (int x = 0; x < 5; x++)
         {
-            keyboard [x][y].setLocation(Keyp);
-            keyboard [x][y].setColor(lightBrown);
-            keyboard [x][y].setWidth(tileWidth);
-            keyboard [x][y].setHeight(tileHeight);
-            //keyboard [x][y].setLetter(keyIn[keyPop]);
+            keyboard[x][y].setLocation(Keyp);
+            keyboard[x][y].setColor(gray);
+            keyboard[x][y].setWidth(tileWidth);
+            keyboard[x][y].setHeight(tileHeight);
+            keyboard[x][y].setLetter('n');
             Keyp.x += tileWidth+10;
-            keyPop++;
         }
         Keyp.y += tileHeight+10;
-        Keyp.x = tileXLocation;
-    }
+        Keyp.y = tileXLocation;
+    }*/
 
 
     //draw keyboard
-    for (int y = 0; y < keyYnum; y++)
+    for (int y = 0; y < 2; y++)
     {
-        for (int x = 0; x < keyXnum; x++)
+        for (int x = 0; x < 5; x++)
         {
             keyboard[x][y].draw(plotter, black);
         }
@@ -142,114 +139,116 @@ int main(int argc, char ** argv)
 
     plotter.update();
 
-    cout << userInput << endl;
-
     while (!plotter.getQuit())
     {
         if (resetInput)
         {
             for (int i = 0; i < 8; i++)
             {
+            key = plotter.getKey();
                 userInput[i] = 'n';
             }
             resetInput = false;
-            cout << userInput << endl;
         }
-
 
 
         //getting user input
-        if((plotter.getMouseClick(cursX, cursY)) && currTileY < 6)
-        {
-            inside = false;
-            for (int x=0; x<keyXnum; x++)
-            {
-                for (int y=0; y<keyYnum; y++)
-                {
-                    if(keyboard[x][y].inside(cursX,cursY))
-                       {
-                           key=keyboard[x][y].getLetter();
-                           inside = true;
-                       }
-                }
-            }
-            if (inside)
-            {
-                if (key == SDL_SCANCODE_RETURN && currTileX == 7)
-                {
-                    user.str(userInput);
-                    cout << userInput << endl;
-                    if (isValidEquation(user))
-                    {
-                        resetInput = true;
-                        currTileX = 0;
 
-                        compareEquations(master, user, compare);
-                        for (int i = 0; i < 8; i++)
-                        {
-                            if (compare[i] == 0)
-                            {
-                                tiles[i][currTileY].setColor(darkRed);
-                            }
-                            else if (compare[i] == 1)
-                            {
-                                tiles[i][currTileY].setColor(yellow);
-                            }
-                            else
-                            {
-                                tiles[i][currTileY].setColor(green);
-                            }
-                            tiles[i][currTileY].draw(plotter, black);
-                        }
-                        currTileY++;
-                    }
-                    /*else if(!isValidEquation(user))
+        if(plotter.kbhit())
+        {
+            key = plotter.getKey();
+            buttonPress = true;
+        }
+
+        //inside = false;
+        /*for (int x=0; x<keyXnum; x++)
+        {
+            for (int y=0; y<keyYnum; y++)
+            {
+                if(keyboard[x][y].inside(cursX,cursY))
                     {
-                        resetInput = true;
-                        currTileX = 0;
-                    }*/
-                    user.str("");
-                    user.clear();
-                }
-                else if (key == BACKSPACE)
+                        key=keyboard[x][y].getLetter();
+                        inside = true;
+                    }
+            }
+        }*/
+
+        if (buttonPress)
+        {
+            buttonPress = false;
+            if (key == SDLK_RETURN && currTileX == 7)
+            {
+                user.str(userInput);
+                if (isValidEquation(user))
                 {
-                    if (currTileX == 7&&endOfIndex)
+                    resetInput = true;
+                    currTileX = 0;
+
+                    compareEquations(master, user, compare);
+                    for (int i = 0; i < 8; i++)
                     {
-                        userInput[currTileX] = 'n';
-                        endOfIndex = false;
-                    }
-                    else
-                    {
-                        currTileX--;
-                        userInput[currTileX] = 'n';
-                        if (currTileX < 0)
+                        if (compare[i] == 0)
                         {
-                            currTileX = 0;
+                            tiles[i][currTileY].setColor(darkRed);
                         }
+                        else if (compare[i] == 1)
+                        {
+                            tiles[i][currTileY].setColor(yellow);
+                        }
+                        else
+                        {
+                            tiles[i][currTileY].setColor(green);
+                        }
+                        tiles[i][currTileY].draw(plotter, black);
                     }
-                    tiles[currTileX][currTileY].setLetter('n');
+                    currTileY++;
+                }
+                /*else if(!isValidEquation(user))
+                {
+                    resetInput = true;
+                    currTileX = 0;
+                }*/
+                user.str("");
+                user.clear();
+            }
+            else if (key == SDLK_DELETE)
+            {
+                if (currTileX == 7&&endOfIndex)
+                {
+                    userInput[currTileX] = 'n';
+                    endOfIndex = false;
+                }
+                else
+                {
+                    currTileX--;
+                    userInput[currTileX] = 'n';
+                    if (currTileX < 0)
+                    {
+                        currTileX = 0;
+                    }
+                }
+                tiles[currTileX][currTileY].setLetter('n');
+                tiles[currTileX][currTileY].draw(plotter, black);
+            }
+            else if (key != SDLK_RETURN)
+            {
+                tiles[currTileX][currTileY].setLetter(key);
+                userInput[currTileX] = key;
+                currTileX++;
+                if (currTileX > 7)
+                {
+                    currTileX = 7;
+                    endOfIndex = true;
                     tiles[currTileX][currTileY].draw(plotter, black);
                 }
-                else if (key != SDL_SCANCODE_RETURN)
+                else
                 {
-                    tiles[currTileX][currTileY].setLetter(key);
-                    userInput[currTileX] = key;
-                    currTileX++;
-                    if (currTileX > 7)
-                    {
-                        currTileX = 7;
-                        endOfIndex = true;
-                        tiles[currTileX][currTileY].draw(plotter, black);
-                    }
-                    else
-                    {
-                        tiles[currTileX-1][currTileY].draw(plotter, black);
-                    }
+                    tiles[currTileX-1][currTileY].draw(plotter, black);
                 }
-                key = 'n';
-                plotter.update();
             }
-
+            key = 'n';
+            plotter.update();
         }
     }
+    return 1;
 }
