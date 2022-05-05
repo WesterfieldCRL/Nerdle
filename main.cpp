@@ -42,15 +42,25 @@ int main(int argc, char ** argv)
     char BACKSPACE = 5;
     bool resetInput = true;
     SDL_Plotter plotter(800,800);
-    int turn=0;
     int tilesX = 8;
     int tilesY = 6;
     int tileWidth = 50;
     int tileHeight = 50;
-    int tileXLocation = 225;
+    int tileXLocation = 150;
     int tileYLocation = 50;
     int currTileX = 0;
     int currTileY = 0;
+
+    int keyXlocation = 150;
+    int keyYlocation = 600;
+    int keyXnum = 8;
+    int keyYnum = 2;
+    char keyIn [16] = {'0','1','2','3','4','5','6','7','8','9','+','-','*','/','=',5};
+    char input;
+    int cursX, cursY;
+    Point cursor(cursX, cursY);
+
+
     bool endOfIndex = false;
     bool win = false;
 
@@ -66,6 +76,8 @@ int main(int argc, char ** argv)
     Color yellow(194,168,0);
 
     Tile tiles[tilesX][tilesY];
+    Tile keyboard [keyXnum] [keyYnum];
+    Point Keyp(keyXlocation,keyYlocation);
     Point point(tileXLocation,tileYLocation);
 
     srand(time(0));
@@ -88,6 +100,29 @@ int main(int argc, char ** argv)
         point.x = tileXLocation;
     }
 
+    for (int y= 0; y < keyYnum; y++)
+    {
+        for (int x= 0; x < keyXnum; x++)
+        {
+            keyboard [x][y].setLocation(Keyp);
+            keyboard [x][y].setColor(lightBrown);
+            keyboard [x][y].setWidth(tileWidth);
+            keyboard [x][y].setHeight(tileHeight);
+            keyboard [x][y].setLetter(keyIn[x+(y*8)]);
+            Keyp.x += tileWidth+10;
+        }
+        Keyp.y += tileHeight+10;
+        Keyp.x = tileXLocation;
+    }
+
+    for (int y = 0; y < keyYnum; y++)
+            {
+                for (int x = 0; x < keyXnum; x++)
+                {
+                    keyboard[x][y].draw(plotter, black);
+                }
+            }
+
     generateEquation(master);
 
     point = tiles[currTileX][currTileY].getLocation();
@@ -95,6 +130,21 @@ int main(int argc, char ** argv)
     while (!plotter.getQuit())
     {
         plotter.update();
+
+        if(plotter.getMouseClick(cursX, cursY))
+        {
+            for (int x=0; x<keyXnum; x++)
+            {
+                for (int y=0; y<keyYnum; y++)
+                {
+                    if(keyboard[x][y].inside(cursX,cursY))
+                       {
+                           input=keyboard[x][y].getLetter();
+                       }
+                }
+            }
+        }
+
 
         if (resetInput)
         {
@@ -108,9 +158,9 @@ int main(int argc, char ** argv)
 
 
         //getting user input
-        if((plotter.kbhit()) && (turn < 6))
+        if((plotter.getMouseClick(cursX, cursY)) && currTileY < 6)
         {
-            key = plotter.getKey();
+            key = input;
             if (key=='0'||key=='1'||key=='2'||key=='3'||key=='4'||key=='5'||key=='6'||key=='7'||key=='8'||key=='9'||key=='+'||key=='-'||key=='*'||key=='/'||key=='=')
             {
                 tiles[currTileX][currTileY].setLetter(key);
@@ -129,25 +179,24 @@ int main(int argc, char ** argv)
                 {
                     resetInput = true;
                     currTileX = 0;
-                    currTileY++;
 
                     compareEquations(master, user, compare);
                     for (int i = 0; i < 8; i++)
                     {
                         if (compare[i] == 0)
                         {
-                            tiles[i][currTileY-1].setColor(darkRed);
+                            tiles[i][currTileY].setColor(darkRed);
                         }
                         else if (compare[i] == 1)
                         {
-                            tiles[i][currTileY-1].setColor(yellow);
+                            tiles[i][currTileY].setColor(yellow);
                         }
                         else
                         {
-                            tiles[i][currTileY-1].setColor(green);
+                            tiles[i][currTileY].setColor(green);
                         }
                     }
-                    turn++;
+                    currTileY++;
                 }
                 else if(!isValidEquation(user))
                 {
@@ -174,6 +223,7 @@ int main(int argc, char ** argv)
                     }
                 }
             }
+            input = 'n';
         }
 
 
@@ -200,19 +250,15 @@ int main(int argc, char ** argv)
 
 
         //Update Tiles
-        if(turn < 6){
-        for (int y = 0; y < tilesY; y++)
-        {
-            for (int x = 0; x < tilesX; x++)
+
+            for (int y = 0; y < tilesY; y++)
             {
-                tiles[x][y].draw(plotter, black);
+                for (int x = 0; x < tilesX; x++)
+                {
+                    tiles[x][y].draw(plotter, black);
+                }
             }
-        }
-        }
-            for (int x = 0; x < tilesX; x++)
-            {
-                tiles[x][5].draw(plotter, black);
-            }
+
 
         drawOutline(point,tileWidth,tileHeight,plotter,red);
         point = tiles[currTileX][currTileY].getLocation();
