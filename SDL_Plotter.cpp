@@ -1,7 +1,13 @@
 /*
- * SDL_Plotter.h
+ * Version 2.4
+ * 4/4/2022
+ *
+ * Version 2.3
+ *  6/28/2021
+ *
  * Version 2.2
  *  4/26/2019
+ *
  *  Dr. Booth
  */
 
@@ -37,6 +43,7 @@ SDL_Plotter::SDL_Plotter(int r, int c, bool WITH_SOUND){
 	leftMouseButtonDown = false;
 	quit = false;
 	SOUND = WITH_SOUND;
+	currentKeyStates = NULL;
 
 	SDL_Init(SDL_INIT_AUDIO);
 
@@ -53,6 +60,8 @@ SDL_Plotter::SDL_Plotter(int r, int c, bool WITH_SOUND){
     pixels   = new Uint32[col * row];
 
     memset(pixels, WHITE, col * row * sizeof(Uint32));
+
+    currentKeyStates = SDL_GetKeyboardState( NULL );
 
     //SOUND Thread Pool
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 );
@@ -83,6 +92,7 @@ bool SDL_Plotter::getQuit(){
 
 bool SDL_Plotter::kbhit(){
 	bool flag = false;
+
 	if(SDL_PollEvent(&event)){
 		if(event.type == SDL_KEYDOWN){
 			flag = true;
@@ -106,10 +116,11 @@ bool SDL_Plotter::kbhit(){
 
 char SDL_Plotter::getKey(){
 
-	char key = '\0';
+    char key = '\0';
+    //char key = SDLK_DELETE;
+	bool modState;
+	modState = (SDL_GetModState() == KMOD_LSHIFT || SDL_GetModState() == KMOD_RSHIFT);
 
-
-	currentKeyStates = SDL_GetKeyboardState( NULL );
 	if(currentKeyStates[SDL_SCANCODE_A]) key = 'A';
 	if(currentKeyStates[SDL_SCANCODE_B]) key = 'B';
 	if(currentKeyStates[SDL_SCANCODE_C]) key = 'C';
@@ -136,31 +147,82 @@ char SDL_Plotter::getKey(){
 	if(currentKeyStates[SDL_SCANCODE_X]) key = 'X';
 	if(currentKeyStates[SDL_SCANCODE_Y]) key = 'Y';
 	if(currentKeyStates[SDL_SCANCODE_Z]) key = 'Z';
-	if(currentKeyStates[SDL_SCANCODE_1]) key = '1';
-	if(currentKeyStates[SDL_SCANCODE_2]) key = '2';
-	if(currentKeyStates[SDL_SCANCODE_3]) key = '3';
-	if(currentKeyStates[SDL_SCANCODE_4]) key = '4';
-	if(currentKeyStates[SDL_SCANCODE_5]) key = '5';
-	if(currentKeyStates[SDL_SCANCODE_6]) key = '6';
-	if(currentKeyStates[SDL_SCANCODE_7]) key = '7';
-	if(currentKeyStates[SDL_SCANCODE_8]) key = '8';
-	if(currentKeyStates[SDL_SCANCODE_9]) key = '9';
-	if(currentKeyStates[SDL_SCANCODE_0]) key = '0';
+
+    if(currentKeyStates[SDL_SCANCODE_1] && !modState) key = '1';
+    if(currentKeyStates[SDL_SCANCODE_2] && !modState) key = '2';
+    if(currentKeyStates[SDL_SCANCODE_3] && !modState) key = '3';
+    if(currentKeyStates[SDL_SCANCODE_4] && !modState) key = '4';
+    if(currentKeyStates[SDL_SCANCODE_5] && !modState) key = '5';
+    if(currentKeyStates[SDL_SCANCODE_6] && !modState) key = '6';
+    if(currentKeyStates[SDL_SCANCODE_7] && !modState) key = '7';
+    if(currentKeyStates[SDL_SCANCODE_8] && !modState) key = '8';
+    if(currentKeyStates[SDL_SCANCODE_9] && !modState) key = '9';
+    if(currentKeyStates[SDL_SCANCODE_0] && !modState) key = '0';
+
+    if(currentKeyStates[SDL_SCANCODE_1] && modState) key = '!';
+    if(currentKeyStates[SDL_SCANCODE_2] && modState) key = '@';
+    if(currentKeyStates[SDL_SCANCODE_3] && modState) key = '#';
+    if(currentKeyStates[SDL_SCANCODE_4] && modState) key = '$';
+    if(currentKeyStates[SDL_SCANCODE_5] && modState) key = '%';
+    if(currentKeyStates[SDL_SCANCODE_6] && modState) key = '^';
+    if(currentKeyStates[SDL_SCANCODE_7] && modState) key = '&';
+    if(currentKeyStates[SDL_SCANCODE_8] && modState) key = '*';
+    if(currentKeyStates[SDL_SCANCODE_9] && modState) key = '(';
+    if(currentKeyStates[SDL_SCANCODE_0] && modState) key = ')';
+
+    if(currentKeyStates[SDL_SCANCODE_KP_1] ) key = '1';
+    if(currentKeyStates[SDL_SCANCODE_KP_2] ) key = '2';
+    if(currentKeyStates[SDL_SCANCODE_KP_3] ) key = '3';
+    if(currentKeyStates[SDL_SCANCODE_KP_4] ) key = '4';
+    if(currentKeyStates[SDL_SCANCODE_KP_5] ) key = '5';
+    if(currentKeyStates[SDL_SCANCODE_KP_6] ) key = '6';
+    if(currentKeyStates[SDL_SCANCODE_KP_7] ) key = '7';
+    if(currentKeyStates[SDL_SCANCODE_KP_8] ) key = '8';
+    if(currentKeyStates[SDL_SCANCODE_KP_9] ) key = '9';
+    if(currentKeyStates[SDL_SCANCODE_KP_0] ) key = '0';
+
+    if(currentKeyStates[SDL_SCANCODE_KP_1] && modState) key = '!';
+    if(currentKeyStates[SDL_SCANCODE_KP_2] && modState) key = '@';
+    if(currentKeyStates[SDL_SCANCODE_KP_3] && modState) key = '#';
+    if(currentKeyStates[SDL_SCANCODE_KP_4] && modState) key = '$';
+    if(currentKeyStates[SDL_SCANCODE_KP_5] && modState) key = '%';
+    if(currentKeyStates[SDL_SCANCODE_KP_6] && modState) key = '^';
+    if(currentKeyStates[SDL_SCANCODE_KP_7] && modState) key = '&';
+    if(currentKeyStates[SDL_SCANCODE_KP_8] && modState) key = '*';
+    if(currentKeyStates[SDL_SCANCODE_KP_9] && modState) key = '(';
+    if(currentKeyStates[SDL_SCANCODE_KP_0] && modState) key = ')';
+
+    if(currentKeyStates[SDLK_PLUS]) key = '+';
+    if(currentKeyStates[SDL_SCANCODE_KP_PLUS]) key = '+';
+    if(currentKeyStates[SDL_SCANCODE_EQUALS] &&  modState) key = '+';
+
+    if(currentKeyStates[SDL_SCANCODE_KP_MINUS]) key = '-';
+    if(currentKeyStates[SDL_SCANCODE_MINUS]) key = '-';
+
+    if(currentKeyStates[SDL_SCANCODE_8] && modState) key = '*';
+    if(currentKeyStates[SDL_SCANCODE_KP_MULTIPLY]) key = '*';
+
+    if(currentKeyStates[SDL_SCANCODE_KP_DIVIDE]) key = '/';
+    if(currentKeyStates[SDL_SCANCODE_SLASH]) key = '/';
+
+    if(currentKeyStates[SDL_SCANCODE_EQUALS] && !modState) key = '=';
+    if(currentKeyStates[SDL_SCANCODE_KP_EQUALS]) key = '=';
+
 	if(currentKeyStates[SDL_SCANCODE_SPACE]) key = ' ';
 	if(currentKeyStates[SDL_SCANCODE_DOWN])  key = DOWN_ARROW;
 	if(currentKeyStates[SDL_SCANCODE_UP])    key = UP_ARROW;
 	if(currentKeyStates[SDL_SCANCODE_LEFT])  key = LEFT_ARROW;
 	if(currentKeyStates[SDL_SCANCODE_RIGHT]) key = RIGHT_ARROW;
-	if(currentKeyStates[SDL_SCANCODE_RETURN]) key = SDL_SCANCODE_RETURN;
-	if(currentKeyStates[SDL_SCANCODE_ESCAPE]) quit = true;
 
-	//Wesley Anastasi added these:
-	if(currentKeyStates[SDL_SCANCODE_KP_MINUS]) key = '-';
-	if(currentKeyStates[SDL_SCANCODE_KP_PLUS]) key = '+';
-	if(currentKeyStates[SDL_SCANCODE_KP_MULTIPLY]) key = '*';
-	if(currentKeyStates[SDL_SCANCODE_KP_DIVIDE]) key = '/';
-	if(currentKeyStates[SDL_SCANCODE_EQUALS]) key = '=';
-	if(currentKeyStates[SDL_SCANCODE_BACKSPACE]) key = 5;
+	//Delete Key
+    if(currentKeyStates[SDL_SCANCODE_BACKSPACE])  key = SDLK_DELETE;
+
+    //Enter/Return Key
+    if(currentKeyStates[SDL_SCANCODE_RETURN])  key = SDLK_RETURN;
+    if(currentKeyStates[SDL_SCANCODE_KP_ENTER]) key = SDLK_RETURN;
+
+    //ESC - enter quit state
+	if(currentKeyStates[SDL_SCANCODE_ESCAPE]) quit = true;
 
     return key;
 }
@@ -281,3 +343,4 @@ void SDL_Plotter::getMouseLocation(int& x, int& y){
     SDL_GetMouseState( &x, &y );
     cout << x << " " << y << endl;
 }
+
