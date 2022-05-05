@@ -1,7 +1,7 @@
 //Author: Wesley Anastasi
 //Assignment Title: Nerdle
 //Assignment Description: create Nerdle w/ SDL plotter
-//Due Date: 5/6/2022
+//Due Date: 5/5/2022
 //Date Created: 4/14/2022
 //Date Last Modified: 4/14/2022
 
