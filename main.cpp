@@ -108,7 +108,7 @@ int main(int argc, char ** argv)
             keyboard [x][y].setColor(lightBrown);
             keyboard [x][y].setWidth(tileWidth);
             keyboard [x][y].setHeight(tileHeight);
-            keyboard [x][y].setLetter(keyIn[x+(y*1)]);
+            keyboard [x][y].setLetter(keyIn[x*(y+1)]);
             Keyp.x += tileWidth+10;
             keyPop++;
         }
