@@ -1,4 +1,4 @@
-//Author: Wesley Anastasi
+//Author: Wesley Anastasi, Madison Thomas, Seth Kacura, Chris Garcia, Christian Saldana, Daigon Fontenot
 //Assignment Title: Nerdle
 //Assignment Description: create Nerdle w/ SDL plotter
 //Due Date: 5/5/2022
