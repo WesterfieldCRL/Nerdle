@@ -57,7 +57,6 @@ int main(int argc, char ** argv)
     int keyYnum = 2;
     char keyIn [18] = {'0','1','2','3','4','5','6','7','8','9','+','-','*','/','=',5,SDL_SCANCODE_RETURN,'n'};
     char input;
-    int keyPop=0;
     int cursX, cursY;
     Point cursor(cursX, cursY);
 
@@ -109,7 +108,7 @@ int main(int argc, char ** argv)
             keyboard [x][y].setColor(lightBrown);
             keyboard [x][y].setWidth(tileWidth);
             keyboard [x][y].setHeight(tileHeight);
-            keyboard [x][y].setLetter(keyIn[keyPop]);
+            keyboard [x][y].setLetter(keyIn[x+(y*1)]);
             Keyp.x += tileWidth+10;
             keyPop++;
         }
