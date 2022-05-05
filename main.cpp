@@ -1,9 +1,9 @@
 //Author: Wesley Anastasi
 //Assignment Title:
 //Assignment Description:
-//Due Date:
+//Due Date: 5/5/2022
 //Date Created: 4/15/2022
-//Date Last Modified: 4/28/2022
+//Date Last Modified: 5/5/2022
 
 
 
@@ -53,10 +53,11 @@ int main(int argc, char ** argv)
 
     int keyXlocation = 150;
     int keyYlocation = 600;
-    int keyXnum = 8;
+    int keyXnum = 9;
     int keyYnum = 2;
-    char keyIn [16] = {'0','1','2','3','4','5','6','7','8','9','+','-','*','/','=',5};
+    char keyIn [18] = {'0','1','2','3','4','5','6','7','8','9','+','-','*','/','=',5,SDL_SCANCODE_RETURN,'n'};
     char input;
+    int keyPop=0;
     int cursX, cursY;
     Point cursor(cursX, cursY);
 
@@ -108,12 +109,15 @@ int main(int argc, char ** argv)
             keyboard [x][y].setColor(lightBrown);
             keyboard [x][y].setWidth(tileWidth);
             keyboard [x][y].setHeight(tileHeight);
-            keyboard [x][y].setLetter(keyIn[x+(y*8)]);
+            keyboard [x][y].setLetter(keyIn[keyPop]);
             Keyp.x += tileWidth+10;
+            keyPop++;
         }
         Keyp.y += tileHeight+10;
         Keyp.x = tileXLocation;
     }
+
+
 
     for (int y = 0; y < keyYnum; y++)
             {
