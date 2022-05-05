@@ -35,12 +35,16 @@ int main(int argc, char ** argv)
 
     //Data Abstraction:
 
+    SDL_Plotter plotter(800,800);
     stringstream user;
     stringstream master;
     char userInput[8];
     char key;
     bool resetInput = true;
-    SDL_Plotter plotter(800,800);
+    bool buttonPress = false;
+    bool endOfIndex = false;
+    bool win = false;
+    bool inside;
     int tilesX = 8;
     int tilesY = 6;
     int tileWidth = 50;
@@ -49,20 +53,14 @@ int main(int argc, char ** argv)
     int tileYLocation = 50;
     int currTileX = 0;
     int currTileY = 0;
-
     int keyXlocation = 150;
     int keyYlocation = 600;
     int keyXnum = 9;
     int keyYnum = 2;
     int cursX, cursY;
-    bool buttonPress = false;
-
-
-    bool endOfIndex = false;
-    bool inside;
+    int compareSum;
 
     int compare[8];
-    int compareSum = 0;
 
     Color black(0,0,0);
     Color gray(100,100,100);
@@ -124,6 +122,8 @@ int main(int argc, char ** argv)
     }
 
     generateEquation(master);
+
+    cout << master.str() << endl;
 
     point = tiles[currTileX][currTileY].getLocation();
 
@@ -252,6 +252,30 @@ int main(int argc, char ** argv)
             key = 'n';
             plotter.update();
         }
+
+        //Takes values from the compare array, if equal to 16 (total possible with all 2s)
+        //returns a win condition
+        compareSum=0;
+        for (int i = 0; i < 8; i++)
+        {
+            compareSum = compareSum+compare[i];
+        }
+
+        if(compareSum == 16){
+            win = true;
+        }
+
+
+        if (win || currTileY > 5)
+        {
+            plotter.setQuit(true);
+        }
+
     }
+
+
+    
+
+
     return 1;
 }
