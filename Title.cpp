@@ -12,21 +12,24 @@ ifstream file;
 char letters [6] = {'N', 'E', 'R', 'D', 'L', 'E'};
 int letterPop = 0;
 
+Tile titleTiles [titleX] [titleY];
+Point titlep(titleXlocation,titleYlocation);
+
 //create title files
 for (int y = 0; y < tilesY; y++)
     {
         for (int x = 0; x < tilesX; x++)
         {
-            tiles[x][y].setLocation(point);
-            tiles[x][y].setColor(white);
-            tiles[x][y].setWidth(tileWidth);
-            tiles[x][y].setHeight(tileHeight);
-            tiles[x][y].setLetter(letters[letterPop]);
-            point.x += tileWidth+10;
+            titleTiles[x][y].setLocation(point);
+            titleTiles[x][y].setColor(white);
+            titleTiles[x][y].setWidth(tileWidth);
+            titleTiles[x][y].setHeight(tileHeight);
+            titleTiles[x][y].setLetter(letters[letterPop]);
+            titlep.x += tileWidth+10;
             letterPop++;
         }
-        point.y += tileHeight+10;
-        point.x = tileXLocation;
+        titlep.y += tileHeight+10;
+        titlep.x = tileXLocation;
     }
 
 //draw title
