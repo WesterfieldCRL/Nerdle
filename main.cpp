@@ -157,7 +157,10 @@ int main(int argc, char ** argv)
         if(plotter.kbhit())
         {
             key = plotter.getKey();
-            buttonPress = true;
+            if ((key >= 42 && key <= 57 && key != ',' && key != '.')||key == SDLK_RETURN||key == SDLK_DELETE||key == '=')
+            {
+                buttonPress = true;
+            }
         }
 
         //inside = false;
