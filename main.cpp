@@ -18,7 +18,6 @@ Assumptions:
 #include <iostream>
 #include <sstream>
 #include <cstring>
-#include <time.h>
 #include "SDL_Plotter.h"
 
 //Tile.h includes Point.h, color.h, and drawObject.h
@@ -78,6 +77,7 @@ int main(int argc, char ** argv)
 
     srand(time(0));
 
+    //Input/Process:
 
     //Set position of tiles
     for (int y = 0; y < tilesY; y++)
@@ -95,6 +95,7 @@ int main(int argc, char ** argv)
         point.y += tileHeight+10;
         point.x = tileXLocation;
     }
+
     /*
     for (int y = 0; y < 2; y++)
     {
@@ -125,8 +126,6 @@ int main(int argc, char ** argv)
 
     cout << master.str() << endl;
 
-    point = tiles[currTileX][currTileY].getLocation();
-
     //draw main game board
     for (int y = 0; y < tilesY; y++)
     {
@@ -139,8 +138,11 @@ int main(int argc, char ** argv)
 
     plotter.update();
 
+    //while the plotter is not told to quit
     while (!plotter.getQuit())
     {
+        //sets userInput to = nnnnnnnn
+        //since n tells the tile class to not draw a char
         if (resetInput)
         {
             for (int i = 0; i < 8; i++)
@@ -157,6 +159,9 @@ int main(int argc, char ** argv)
         if(plotter.kbhit())
         {
             key = plotter.getKey();
+            //if key is a valid input run the main event block
+            //checks for the askii values between * and 9 and excludes , and .
+            //the SDLK's and = are not in that range so they get seperate statements
             if ((key >= 42 && key <= 57 && key != ',' && key != '.')||key == SDLK_RETURN||key == SDLK_DELETE||key == '=')
             {
                 buttonPress = true;
@@ -176,9 +181,11 @@ int main(int argc, char ** argv)
             }
         }*/
 
-        if (buttonPress)
+
+        if (buttonPress && currTileY < 6)
         {
             buttonPress = false;
+            //
             if (key == SDLK_RETURN && currTileX == 7)
             {
                 user.str(userInput);
