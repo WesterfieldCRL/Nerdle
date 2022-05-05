@@ -104,3 +104,19 @@ void Tile::draw(SDL_Plotter& plotter, Color alt) const
         drawChar(letter, temp, plotter, alt,width/16);
     }
 }
+
+bool Tile::inside(int x, int y)
+{
+    bool returnValue = false;
+    for (int i = p.y; i < height+p.y; i++)
+    {
+        for (int a = p.x; a < width+p.x; a++)
+        {
+            if (x == a && y == i)
+            {
+                returnValue = true;
+            }
+        }
+    }
+    return returnValue;
+}
