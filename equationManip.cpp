@@ -123,7 +123,6 @@ bool isValidEquation(stringstream& master)
     int numSum;
     int finalNum;
     char opers[3];
-    int count = 0;
     bool isValid = true;
 
     //store equation from stringstream in variables
