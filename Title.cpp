@@ -20,7 +20,7 @@ for (int y = 0; y < tilesY; y++)
     {
         for (int x = 0; x < tilesX; x++)
         {
-            titleTiles[x][y].setLocation(point);
+            titleTiles[x][y].setLocation(titlep);
             titleTiles[x][y].setColor(white);
             titleTiles[x][y].setWidth(tileWidth);
             titleTiles[x][y].setHeight(tileHeight);
