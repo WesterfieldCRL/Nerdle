@@ -1,9 +1,10 @@
-//Author: Wesley Anastasi
-//Assignment Title: Program 21
-//Assignment Description: Point Struct
-//Due Date: 4/5/2022
-//Date Created: 4/4/2022
-//Date Last Modified: 4/4/2022
+
+//Author: Wesley Anastasi, Madison Thomas, Seth Kacura, Chris Garcia, Christian Saldana, Daigon Fontenot
+//Assignment Title: Nerdle
+//Assignment Description: create Nerdle w/ SDL plotter
+//Due Date: 5/5/2022
+//Date Created: 4/15/2022
+//Date Last Modified: 5/5/2022
 
 #include "Point.h"
 
