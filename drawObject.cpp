@@ -99,6 +99,9 @@ void drawChar(char character, const Point& p, SDL_Plotter& plotter, const Color&
         case 5:
             file.open("back.dat");
             break;
+        case SDL_SCANCODE_RETURN:
+            file.open("enter.dat");
+            break;
         default:
             file.open("characterNotFound");
             break;
