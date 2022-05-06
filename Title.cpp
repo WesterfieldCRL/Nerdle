@@ -11,9 +11,10 @@
 ifstream file;
 char letters [6] = {'N', 'E', 'R', 'D', 'L', 'E'};
 int letterPop = 0;
+int startX=0, startY=0;
 
 Tile titleTiles [titleX] [titleY];
-Point titlep(titleXlocation,titleYlocation);
+Point titlep(startX,startY);
 
 //create title files
 for (int y = 0; y < tilesY; y++)
@@ -37,6 +38,7 @@ for (int y = 0; y < keyYnum; y++)
 {
     for (int x = 0; x < keyXnum; x++)
     {
-        keyboard[x][y].draw(plotter, black);
+        titleTiles[x][y].draw(plotter, black);
     }
 }
+
