@@ -75,9 +75,28 @@ int main(int argc, char ** argv)
     Point Keyp(keyXlocation,keyYlocation);
     Point point(tileXLocation,tileYLocation);
 
+    char nerdleLetters[6] = {'N', 'E', 'R', 'D', 'L', 'E'};
+    char winnerLetter[6] = {'W', 'I', 'N', 'N', 'E', 'R'};
+    char loserLetter[6] = {'L', 'O', 'S', 'E', 'R', '!'};
+    
+    Tile titleTiles[6];
+    Point titlep(tileXLocation,tileYLocation-tileHeight);
+
     srand(time(0));
 
     //Input/Process/Output:
+
+    //create title files
+    for (int i = 0; i < 6; i++)
+    {
+        titleTiles[i].setLocation(titlep);
+        titleTiles[i].setColor(white);
+        titleTiles[i].setWidth(40);
+        titleTiles[i].setHeight(40);
+        titleTiles[i].setLetter(nerdleLetters[i]);
+        titleTiles[i].draw(plotter, black);
+        titlep.x += 45;
+    }
 
     //Set position of tiles
     for (int y = 0; y < tilesY; y++)
@@ -106,8 +125,6 @@ int main(int argc, char ** argv)
     }
 
     generateEquation(master);
-
-    cout << master.str() << endl;
 
     //draw main game board
     for (int y = 0; y < tilesY; y++)
@@ -298,7 +315,25 @@ int main(int argc, char ** argv)
                     }
                 }
             }
+            if (currTileY > 5)
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    titleTiles[i].setLetter(loserLetter[i]);
+                    titleTiles[i].draw(plotter, darkRed);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 6; i++)
+                {
+                    titleTiles[i].setLetter(winnerLetter[i]);
+                    titleTiles[i].draw(plotter, green);
+                }
+            }
             plotter.update();
+            plotter.Sleep(3000);
+            plotter.setQuit(true);
         }
 
     }

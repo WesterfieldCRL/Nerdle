@@ -97,6 +97,21 @@ void drawChar(char character, const Point& p, SDL_Plotter& plotter, const Color&
         case 'L':
             file.open("L.dat");
             break;
+        case 'I':
+            file.open("I.dat");
+            break;
+        case 'W':
+            file.open("W.dat");
+            break;
+        case 'O':
+            file.open("O.dat");
+            break;
+        case 'S':
+            file.open("S.dat");
+            break;
+        case '!':
+            file.open("Exclamation.dat");
+            break;
         case '+':
             file.open("plus.dat");
             break;
