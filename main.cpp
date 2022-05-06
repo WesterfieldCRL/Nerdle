@@ -154,15 +154,26 @@ int main(int argc, char ** argv)
         if (buttonPress && currTileY < 6)
         {
             buttonPress = false;
+            //if the enter/return key is pressed and the active tile is at the end
             if (key == SDLK_RETURN && currTileX == 7)
             {
+                //make sure stringstream is empty and fill it with the cstring with the input
+                user.str("");
+                user.clear();
                 user.str(userInput);
+                //checks if the equation is valid
                 if (isValidEquation(user))
                 {
+                    //resetInput and move active tile to the front
                     resetInput = true;
                     currTileX = 0;
 
+                    //get an array of ints from the compareEquations function
                     compareEquations(master, user, compare);
+                    //if the int at index i is 0, then it does not exist in the equation
+                    //if it is 1 then it exists but is in the wrong place
+                    //if it is 2 then it is in the correct place
+                    //then set the color accordingly
                     for (int i = 0; i < 8; i++)
                     {
                         if (compare[i] == 0)
@@ -179,70 +190,94 @@ int main(int argc, char ** argv)
                         }
                         tiles[i][currTileY].draw(plotter, black);
                     }
+                    //Takes values from the compare array, if equal to 16 (total possible with all 2s)
+                    //returns a win condition
+                    compareSum=0;
+                    for (int i = 0; i < 8; i++)
+                    {
+                        compareSum = compareSum+compare[i];
+                    }
+                    if(compareSum == 16){
+                        win = true;
+                    }
+                    //move too the next row
                     currTileY++;
                 }
-                /*else if(!isValidEquation(user))
+                else //if the equation is not valid change all tiles to red briefly then change them back
                 {
-                    resetInput = true;
-                    currTileX = 0;
-                }*/
-                user.str("");
-                user.clear();
+                    for (int i = 0; i < tilesX; i++)
+                    {
+                        tiles[i][currTileY].setColor(red);
+                        tiles[i][currTileY].draw(plotter, black);
+                    }
+                    plotter.update();
+                    //using sleep so that user cannot input anything untill back to normal
+                    plotter.Sleep(1000);
+                    for (int i = 0; i < tilesX; i++)
+                    {
+                        tiles[i][currTileY].setColor(lightBrown);
+                        tiles[i][currTileY].draw(plotter, black);
+                    }
+                    plotter.update();
+                }
             }
-            else if (key == SDLK_DELETE)
+            else if (key == SDLK_DELETE) //if the key is backspace
             {
+                //if active tile is end of index and is filled
+                //set tile char to the empty variable
+                //the bool is for when the active tile is the end of the row,
+                //but it is filled
                 if (currTileX == 7&&endOfIndex)
                 {
                     userInput[currTileX] = 'n';
                     endOfIndex = false;
                 }
-                else
+                else //if the active tile is end of index and the tile is not filled
                 {
+                    //move the active tile backwards and set its character to nothing
                     currTileX--;
                     userInput[currTileX] = 'n';
+                    //if the active tile has been moved before the front of the row then make it stay on the end
                     if (currTileX < 0)
                     {
                         currTileX = 0;
                     }
                 }
+                //erase the tile's char
+                //and update the tiles drawing on the plotter
                 tiles[currTileX][currTileY].setLetter('n');
                 tiles[currTileX][currTileY].draw(plotter, black);
             }
             else if (key != SDLK_RETURN)
             {
+                //needs to make sure its not the enter key because the first if will only trigger
+                //if the active tile is at the end.
+
+                //sets the active tile to whatever key was pressed
                 tiles[currTileX][currTileY].setLetter(key);
+                //sets the cstring at the current tile index to the char
                 userInput[currTileX] = key;
+                //draws the tile with the new char
+                tiles[currTileX][currTileY].draw(plotter, black);
+                //moves the active tile forwards
                 currTileX++;
+                //if the active tile is past the end move it to the end
+                //endOfIndex is used for determining if the active tile is one the end and filled with a char
+                //needed for the backspace
                 if (currTileX > 7)
                 {
                     currTileX = 7;
                     endOfIndex = true;
-                    tiles[currTileX][currTileY].draw(plotter, black);
-                }
-                else
-                {
-                    tiles[currTileX-1][currTileY].draw(plotter, black);
                 }
             }
-            key = 'n';
+            //update the plotter
             plotter.update();
         }
 
-        //Takes values from the compare array, if equal to 16 (total possible with all 2s)
-        //returns a win condition
-        compareSum=0;
-        for (int i = 0; i < 8; i++)
-        {
-            compareSum = compareSum+compare[i];
-        }
-
-        if(compareSum == 16){
-            win = true;
-        }
-
-        //sets removes characters from all used tiles and clears all unsued ones
+        //upon a end condition, either getting the equation right or running out of turns
         if (win || currTileY > 5)
         {
+            //erases the character from all colored tiles
             for (int y = 0; y < currTileY; y++)
             {
                 for (int x = 0; x < tilesX; x++)
@@ -251,6 +286,7 @@ int main(int argc, char ** argv)
                     tiles[x][y].draw(plotter, black);
                 }
             }
+            //if some tiles are not colored, erase them
             if (currTileY < 6)
             {
                 for (int y = currTileY; y < 6; y++)
