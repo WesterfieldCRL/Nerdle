@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
     int tileWidth = 50;
     int tileHeight = 50;
     int tileXLocation = 150;
-    int tileYLocation = 50;
+    int tileYLocation = 200;
     int currTileX = 0;
     int currTileY = 0;
     int keyXlocation = 150;
@@ -240,7 +240,7 @@ int main(int argc, char ** argv)
             win = true;
         }
 
-
+        //sets removes characters from all used tiles and clears all unsued ones
         if (win || currTileY > 5)
         {
             for (int y = 0; y < currTileY; y++)
@@ -249,6 +249,17 @@ int main(int argc, char ** argv)
                 {
                     tiles[x][y].setLetter('n');
                     tiles[x][y].draw(plotter, black);
+                }
+            }
+            if (currTileY < 6)
+            {
+                for (int y = currTileY; y < 6; y++)
+                {
+                    for (int x = 0; x < tilesX; x++)
+                    {
+                        tiles[x][y].setColor(white);
+                        tiles[x][y].draw(plotter,black);
+                    }
                 }
             }
             plotter.update();
