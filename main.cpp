@@ -96,23 +96,6 @@ int main(int argc, char ** argv)
         point.x = tileXLocation;
     }
 
-    /*
-    for (int y = 0; y < 2; y++)
-    {
-        for (int x = 0; x < 5; x++)
-        {
-            keyboard[x][y].setLocation(Keyp);
-            keyboard[x][y].setColor(gray);
-            keyboard[x][y].setWidth(tileWidth);
-            keyboard[x][y].setHeight(tileHeight);
-            keyboard[x][y].setLetter('n');
-            Keyp.x += tileWidth+10;
-        }
-        Keyp.y += tileHeight+10;
-        Keyp.y = tileXLocation;
-    }*/
-
-
     //draw keyboard
     for (int y = 0; y < 2; y++)
     {
@@ -168,24 +151,9 @@ int main(int argc, char ** argv)
             }
         }
 
-        //inside = false;
-        /*for (int x=0; x<keyXnum; x++)
-        {
-            for (int y=0; y<keyYnum; y++)
-            {
-                if(keyboard[x][y].inside(cursX,cursY))
-                    {
-                        key=keyboard[x][y].getLetter();
-                        inside = true;
-                    }
-            }
-        }*/
-
-
         if (buttonPress && currTileY < 6)
         {
             buttonPress = false;
-            //
             if (key == SDLK_RETURN && currTileX == 7)
             {
                 user.str(userInput);
@@ -275,7 +243,15 @@ int main(int argc, char ** argv)
 
         if (win || currTileY > 5)
         {
-            plotter.setQuit(true);
+            for (int y = 0; y < currTileY; y++)
+            {
+                for (int x = 0; x < tilesX; x++)
+                {
+                    tiles[x][y].setLetter('n');
+                    tiles[x][y].draw(plotter, black);
+                }
+            }
+            plotter.update();
         }
 
     }
