@@ -77,7 +77,7 @@ int main(int argc, char ** argv)
 
     srand(time(0));
 
-    //Input/Process:
+    //Input/Process/Output:
 
     //Set position of tiles
     for (int y = 0; y < tilesY; y++)
@@ -137,8 +137,7 @@ int main(int argc, char ** argv)
         }
 
 
-        //getting user input
-
+        //Input:
         if(plotter.kbhit())
         {
             key = plotter.getKey();
@@ -151,6 +150,7 @@ int main(int argc, char ** argv)
             }
         }
 
+        //Process/Output;
         if (buttonPress && currTileY < 6)
         {
             buttonPress = false;
